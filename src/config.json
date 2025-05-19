@@ -1,9 +1,0 @@
-{
-    "log": {
-      "log_dir": "../log",
-      "log_to_file": true,
-      "log_prefix": "example",
-      "log_level": "DEBUG"
-    }
-}
-  

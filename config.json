@@ -1,0 +1,8 @@
+{
+    "logger": {
+      "level": "DEBUG",
+      "enable_file_output": true,
+      "output_directory": "../logs",
+      "file_prefix": "example_"
+    }
+}

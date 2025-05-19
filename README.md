@@ -35,15 +35,12 @@ make build
 make run
 
 # srcディレクトリに移動し、sample.pyを実行
-cd src
 python sample.py your_name
 ```
 
 ### テストの実行
 
 ```sh
-cd tests
-
 # テストの実行
 pytest
 
@@ -59,17 +56,19 @@ pytest --log-cli-level=DEBUG
 
 ```
 .
-├── src                 # メインコードと設定ファイルを格納
-│   ├── config.json
-│   └── sample.py
+├── common              # 共通モジュールを格納
+│  ├── __init__.py
+│  ├── config_loader.py
+│  └── logger_setup.py
 ├── tests               # テストコードの格納
 │  ├── __init__.py
 │  └── test_main.py
+├── config.json         # 設定ファイル
+├── sample.py           # メインのサンプルファイル
 ├── Dockerfile
 ├── Makefile
 └── README.md
 ```
-
 
 ### config.jsonの内容
 
@@ -77,12 +76,12 @@ logセクションで、setup_logger関数の設定が可能
 
 ```json
 {
-  "log": {
-    "log_dir": "log",           // ログファイル保存ディレクトリ
-    "log_to_file": true,        // ファイル出力を有効にするか(falseだとコンソールのみ)
-    "log_prefix": "example",    // ログファイル名の接頭辞(example_YYYYMMDD_hhmmss.log)
-    "log_level": "INFO"         // ログレベル (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-  }
+    "logger": {
+      "level": "DEBUG",               // ログレベル (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+      "enable_file_output": true,     // ファイル出力を有効にするか(falseだとコンソールのみ)
+      "output_directory": "../logs",  // ログファイル保存ディレクトリ
+      "file_prefix": "example_"       // ログファイル名の接頭辞(example_YYYYMMDD_hhmmss.log)
+    }
 }
 ```
 
@@ -109,3 +108,4 @@ update: ユーザー認証の新機能を追加
 | Fix          | バグ修正                                                         |
 | Refactor     | コードのリファクタリング                                         |
 | Chore        | 機能には影響しない更新のみ<br>ドキュメント、テスト機能の変更など |
+
