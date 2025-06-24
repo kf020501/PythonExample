@@ -6,6 +6,7 @@
 """
 import logging
 import sys
+import uuid6
 from common.config_loader import load_config
 from common.logger_setup import setup_logger
 
@@ -52,6 +53,11 @@ def main(args):
     # --------------------------------------------------------------------------
 
     logger.debug('処理を開始します')
+
+    # UUIDv7を取得
+    u7 = uuid6.uuid7()
+
+    logger.info(f'あなたのUUIDは{u7}です')
     logger.info(f'あなたの名前は{your_name}です')
 
     logger.debug('処理が完了しました')
