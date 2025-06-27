@@ -56,18 +56,21 @@ pytest --log-cli-level=DEBUG
 
 ```
 .
-├── common              # 共通モジュールを格納
-│  ├── __init__.py
-│  ├── config_loader.py
-│  └── logger_setup.py
-├── tests               # テストコードの格納
-│  ├── __init__.py
-│  └── test_main.py
-├── config.json         # 設定ファイル
-├── sample.py           # メインのサンプルファイル
 ├── Dockerfile
 ├── Makefile
-└── README.md
+├── README.md
+├── requirements.txt
+└── src                 # ここより下がコンテナにマウントされる
+    ├── config.json     # 設定ファイル
+    ├── sample.py       # メインのサンプルファイル
+    ├── common          # 共通モジュールを格納
+    │   ├── __init__.py
+    │   ├── config_loader.py
+    │   └── logger_setup.py
+    └── tests           # テストコードの格納
+        ├── __init__.py
+        ├── test_logger_setup.py
+        └── test_main.py
 ```
 
 ### config.jsonの内容
@@ -77,10 +80,17 @@ logセクションで、setup_logger関数の設定が可能
 ```json
 {
     "logger": {
-      "level": "DEBUG",               // ログレベル (DEBUG, INFO, WARNING, ERROR, CRITICAL)
-      "enable_file_output": true,     // ファイル出力を有効にするか(falseだとコンソールのみ)
-      "output_directory": "../logs",  // ログファイル保存ディレクトリ
-      "file_prefix": "example_"       // ログファイル名の接頭辞(example_YYYYMMDD_hhmmss.log)
+        "level": "INFO",        // ルートロガーのレベル (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+        "console_output": {     // ログのコンソール出力の設定
+            "enabled": true,
+            "level": "INFO"
+        },
+        "file_output": {        // ログのファイル出力の設定
+            "enabled": true,
+            "level": "DEBUG",
+            "output_directory": "../logs",
+            "file_prefix": "example_"
+        }
     }
 }
 ```
