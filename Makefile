@@ -1,7 +1,7 @@
 # Dockerイメージ名とタグを変数に設定
 IMAGE_NAME := python-dev-ubuntu22.04
 TAG := latest
-WORK_DIR := .
+WORK_DIR := ./src
 
 .PHONY: build run
 
@@ -11,7 +11,7 @@ build:
 
 # Dockerコンテナの起動
 run:
-	docker run -v $(WORK_DIR):/home/user/work -it --rm $(IMAGE_NAME):$(TAG)
+	docker run -v $(WORK_DIR):/home/user/src -it --rm $(IMAGE_NAME):$(TAG)
 
 # イメージの削除
 clean:

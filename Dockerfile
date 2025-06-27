@@ -26,7 +26,7 @@ ENV LANG=ja_JP.UTF-8 \
 RUN useradd -m -s /bin/bash user && \
     echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER user
-WORKDIR /home/user/work
+WORKDIR /home/user/src
 
 # Pythonパッケージのインストール(venv)
 COPY requirements.txt /home/user
